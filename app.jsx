@@ -38,7 +38,7 @@ const notD = (bp) => bp !== 'desktop';
 const pad = (bp) => isM(bp) ? '20px' : isT(bp) ? '32px' : '56px';
 
 /* ===== NAV ===== */
-function ConservativeNav({ onHome, onNavigate }) {
+function ConservativeNav({ onHome, onNavigate, cartCount = 0, onCart }) {
   const { bp } = useViewport();
   const [open, setOpen] = React.useState(false);
   const [visible, setVisible] = React.useState(false); // controls CSS transition state
@@ -92,15 +92,15 @@ function ConservativeNav({ onHome, onNavigate }) {
           </button>
           <div style={{ display: 'flex', gap: 14, color: scrolled ? 'var(--cream-50)' : 'var(--ink)', transition: 'color .3s' }}>
             <button><Icon.search /></button>
-            <button style={{ position: 'relative' }}>
+            <button onClick={onCart} style={{ position: 'relative' }}>
               <Icon.cart />
-              <span style={{
+              {cartCount > 0 && <span style={{
                 position: 'absolute', top: -4, right: -6, fontSize: 9,
                 background: scrolled ? 'var(--cream-50)' : 'var(--forest-800)',
                 color: scrolled ? 'var(--forest-800)' : 'var(--cream-50)',
                 borderRadius: 999, width: 14, height: 14, display: 'grid', placeItems: 'center',
                 fontFamily: 'var(--font-mono)', transition: 'background .3s, color .3s'
-              }}>2</span>
+              }}>{cartCount}</span>}
             </button>
           </div>
         </nav>
@@ -201,20 +201,20 @@ function ConservativeNav({ onHome, onNavigate }) {
             {item.icon}
           </button>
         )}
-        <button style={{
+        <button onClick={onCart} style={{
           position: 'relative', width: 36, height: 36, borderRadius: '50%',
           display: 'grid', placeItems: 'center', transition: 'background .2s'
         }}
         onMouseEnter={(e) => e.currentTarget.style.background = scrolled ? 'rgba(255,255,255,.12)' : 'var(--ink-08)'}
         onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
           <Icon.cart />
-          <span style={{
+          {cartCount > 0 && <span style={{
             position: 'absolute', top: -4, right: -6, fontSize: 9,
             background: scrolled ? 'var(--cream-50)' : 'var(--forest-800)',
             color: scrolled ? 'var(--forest-800)' : 'var(--cream-50)',
             borderRadius: 999, width: 14, height: 14, display: 'grid', placeItems: 'center',
             fontFamily: 'var(--font-mono)', transition: 'background .3s, color .3s'
-          }}>2</span>
+          }}>{cartCount}</span>}
         </button>
       </div>
     </nav>
@@ -690,7 +690,7 @@ function ConservativeFooter() {
 }
 
 /* ===== ABOUT PAGE ===== */
-function AboutPage({ onHome, onNavigate }) {
+function AboutPage({ onHome, onNavigate, cartCount, onCart }) {
   const { bp } = useViewport();
   const brand = DC_DATA.brand;
 
@@ -738,7 +738,7 @@ function AboutPage({ onHome, onNavigate }) {
 
   return (
     <>
-      <ConservativeNav onHome={onHome} onNavigate={onNavigate} />
+      <ConservativeNav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
 
       {/* ── Hero ── */}
       <Section bg="var(--cream-50)" py={isM(bp) ? 56 : isT(bp) ? 72 : 96}>
@@ -982,10 +982,10 @@ function AboutPage({ onHome, onNavigate }) {
 }
 
 /* ===== HOME ROOT ===== */
-function ConservativeHome({ onOpen, wishlist, onWish, onAdd, onHome, onNavigate }) {
+function ConservativeHome({ onOpen, wishlist, onWish, onAdd, onHome, onNavigate, cartCount, onCart }) {
   return (
     <>
-      <ConservativeNav onHome={onHome} onNavigate={onNavigate} />
+      <ConservativeNav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
       <ConservativeHero />
       <div style={{ marginTop: -10 }} />
       <ConservativePromo />
@@ -1147,7 +1147,7 @@ function ProductDetail({ product, onBack, onAdd, onWish, wished }) {
               <button onClick={() => setQty(qty + 1)}
                 style={{ width: 40, height: 48, fontSize: 18, color: 'var(--forest-800)' }}>+</button>
             </div>
-            <button onClick={() => onAdd(product, qty)} className="btn-primary" style={{
+            <button onClick={() => onAdd(product, qty, size)} className="btn-primary" style={{
               flex: 1, justifyContent: 'center', padding: '14px 22px', height: 48
             }}>
               <Icon.cart /> 加入購物車
@@ -1286,10 +1286,218 @@ function ProductDetail({ product, onBack, onAdd, onWish, wished }) {
   );
 }
 
+/* ===== CART PAGE ===== */
+function CartPage({ cart, onHome, onNavigate, showToast, cartCount, onCart }) {
+  const { bp } = useViewport();
+  const { items, updateQty, remove, totalItems, totalPrice } = cart;
+  const [promo, setPromo] = React.useState('');
+
+  const shipping = totalPrice >= 1200 ? 0 : 150;
+  const discount = 0;
+  const grandTotal = totalPrice + shipping - discount;
+
+  if (items.length === 0) {
+    return (
+      <>
+        <ConservativeNav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
+        <section style={{
+          padding: `${isM(bp) ? 48 : 80}px ${pad(bp)}`,
+          textAlign: 'center', minHeight: '50vh',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
+        }}>
+          <Icon.cart width={48} height={48} style={{ color: 'var(--ink-15)', marginBottom: 24 }} />
+          <h1 className="serif" style={{ fontSize: isM(bp) ? 24 : 32, fontWeight: 600, color: 'var(--forest-900)', marginBottom: 12 }}>
+            購物車是空的
+          </h1>
+          <p style={{ fontSize: 14, color: 'var(--ink-60)', marginBottom: 28 }}>
+            還沒有加入任何商品，去逛逛吧！
+          </p>
+          <button onClick={onHome} className="btn-primary" style={{ justifyContent: 'center' }}>
+            逛逛商品 <Icon.arrow />
+          </button>
+        </section>
+        <ConservativeFooter />
+      </>
+    );
+  }
+
+  const CartItemRow = ({ item }) => {
+    const subtotal = item.price * item.qty;
+    if (isM(bp)) {
+      return (
+        <div style={{ padding: '16px 0', display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+            <div style={{ width: 64, height: 64, background: 'var(--sage-100)', flexShrink: 0, overflow: 'hidden' }}>
+              <SafeImg src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontSize: 14, fontWeight: 500, color: 'var(--forest-900)' }}>{item.name}</div>
+              <div style={{ fontSize: 12, color: 'var(--ink-60)', marginTop: 4 }}>尺寸：{item.size}</div>
+              <div className="mono" style={{ fontSize: 12, color: 'var(--ink-60)', marginTop: 4 }}>{NT(item.price)}</div>
+            </div>
+            <button onClick={() => remove(item.id, item.size)} style={{ color: 'var(--ink-40)', flexShrink: 0 }}>
+              <Icon.trash width={18} height={18} />
+            </button>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--ink-15)' }}>
+              <button onClick={() => updateQty(item.id, item.size, item.qty - 1)}
+                style={{ width: 36, height: 36, fontSize: 16, color: 'var(--forest-800)' }}>−</button>
+              <span className="mono" style={{ width: 44, textAlign: 'center', fontSize: 14, fontWeight: 500, borderLeft: '1px solid var(--ink-15)', borderRight: '1px solid var(--ink-15)', lineHeight: '36px' }}>{item.qty}</span>
+              <button onClick={() => updateQty(item.id, item.size, item.qty + 1)}
+                style={{ width: 36, height: 36, fontSize: 16, color: 'var(--forest-800)' }}>+</button>
+            </div>
+            <span className="mono" style={{ fontSize: 15, fontWeight: 500, color: 'var(--forest-900)' }}>{NT(subtotal)}</span>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div style={{ padding: '24px 0', display: 'flex', alignItems: 'center', gap: 24 }}>
+        <div style={{ width: 80, height: 80, background: 'var(--sage-100)', flexShrink: 0, overflow: 'hidden' }}>
+          <SafeImg src={item.img} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 15, fontWeight: 500, color: 'var(--forest-900)' }}>{item.name}</div>
+          <div style={{ fontSize: 13, color: 'var(--ink-60)', marginTop: 4 }}>尺寸：{item.size}</div>
+          <div className="mono" style={{ fontSize: 13, color: 'var(--ink-60)', marginTop: 4 }}>{NT(item.price)}</div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', border: '1px solid var(--ink-15)', flexShrink: 0 }}>
+          <button onClick={() => updateQty(item.id, item.size, item.qty - 1)}
+            style={{ width: 36, height: 36, fontSize: 16, color: 'var(--forest-800)' }}>−</button>
+          <span className="mono" style={{ width: 44, textAlign: 'center', fontSize: 14, fontWeight: 500, borderLeft: '1px solid var(--ink-15)', borderRight: '1px solid var(--ink-15)', lineHeight: '36px' }}>{item.qty}</span>
+          <button onClick={() => updateQty(item.id, item.size, item.qty + 1)}
+            style={{ width: 36, height: 36, fontSize: 16, color: 'var(--forest-800)' }}>+</button>
+        </div>
+        <span className="mono" style={{ fontSize: 15, fontWeight: 500, color: 'var(--forest-900)', minWidth: 90, textAlign: 'right' }}>{NT(subtotal)}</span>
+        <button onClick={() => remove(item.id, item.size)} style={{ color: 'var(--ink-40)', flexShrink: 0 }}>
+          <Icon.trash width={18} height={18} />
+        </button>
+      </div>
+    );
+  };
+
+  const OrderSummary = () => (
+    <div style={{
+      background: 'var(--sage-100)', padding: isM(bp) ? '24px 20px' : '32px',
+      display: 'flex', flexDirection: 'column', gap: isM(bp) ? 16 : 24,
+    }}>
+      <h2 className="serif" style={{ fontSize: isM(bp) ? 17 : 20, fontWeight: 600, color: 'var(--forest-900)' }}>訂單摘要</h2>
+
+      <div style={{ display: 'flex', gap: 8 }}>
+        <input value={promo} onChange={(e) => setPromo(e.target.value)}
+          placeholder="輸入優惠碼"
+          style={{
+            flex: 1, padding: '10px 12px', border: '1px solid var(--ink-15)',
+            background: 'transparent', fontSize: 14, color: 'var(--forest-900)',
+            outline: 'none'
+          }} />
+        <button onClick={() => { if (promo) showToast('優惠碼功能尚未開放'); }}
+          style={{
+            padding: '10px 16px', background: 'var(--forest-800)', color: 'var(--cream-50)',
+            fontSize: 14, fontWeight: 500
+          }}>套用</button>
+      </div>
+
+      <div style={{ borderTop: '1px solid var(--ink-08)', paddingTop: isM(bp) ? 12 : 16, display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14 }}>
+          <span style={{ color: 'var(--forest-900)' }}>小計</span>
+          <span className="mono" style={{ fontWeight: 500 }}>{NT(totalPrice)}</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14 }}>
+          <span style={{ color: 'var(--forest-900)' }}>運費</span>
+          <span className="mono" style={{ fontWeight: 500, color: shipping === 0 ? 'var(--forest-600)' : 'var(--forest-900)' }}>
+            {shipping === 0 ? '免運' : NT(shipping)}
+          </span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14 }}>
+          <span style={{ color: 'var(--forest-900)' }}>折扣</span>
+          <span className="mono" style={{ fontWeight: 500, color: 'var(--ink-60)' }}>-{NT(discount)}</span>
+        </div>
+      </div>
+
+      <div style={{ borderTop: '1px solid var(--ink-08)', paddingTop: isM(bp) ? 12 : 16 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--forest-900)' }}>總計</span>
+          <span className="mono" style={{ fontSize: 18, fontWeight: 600, color: 'var(--forest-900)' }}>{NT(grandTotal)}</span>
+        </div>
+      </div>
+
+      <button onClick={() => showToast('結帳功能尚未開放')}
+        className="btn-primary" style={{ justifyContent: 'center', padding: '14px 24px' }}>
+        前往結帳
+      </button>
+
+      <button onClick={onHome} style={{
+        display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+        fontSize: 14, color: 'var(--ink-60)', background: 'none', border: 'none', cursor: 'pointer'
+      }}>
+        繼續購物 <Icon.arrow />
+      </button>
+    </div>
+  );
+
+  return (
+    <>
+      <ConservativeNav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
+      <div style={{
+        padding: `${isM(bp) ? 24 : 48}px ${pad(bp)} ${isM(bp) ? 32 : 80}px`,
+        display: isD(bp) ? 'flex' : 'block',
+        gap: 64, alignItems: 'flex-start',
+      }}>
+        {/* Cart Items */}
+        <div style={{ flex: 1 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: isM(bp) ? 16 : 32 }}>
+            <h1 className="serif" style={{ fontSize: isM(bp) ? 22 : 28, fontWeight: 600, color: 'var(--forest-900)' }}>
+              {isM(bp) ? `購物車 (${totalItems})` : '購物車'}
+            </h1>
+            {!isM(bp) && <span style={{ fontSize: 14, color: 'var(--ink-60)' }}>({totalItems} 件商品)</span>}
+          </div>
+
+          {isD(bp) && (
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: 24, padding: '12px 0',
+              fontSize: 12, color: 'var(--ink-40)', fontWeight: 500
+            }}>
+              <span style={{ width: 80 }} />
+              <span style={{ flex: 1 }}>商品</span>
+              <span style={{ width: 116, flexShrink: 0 }}>數量</span>
+              <span style={{ width: 90, textAlign: 'right', flexShrink: 0 }}>小計</span>
+              <span style={{ width: 18 }} />
+            </div>
+          )}
+
+          <div style={{ borderTop: '1px solid var(--ink-08)' }}>
+            {items.map((item, i) => (
+              <React.Fragment key={`${item.id}-${item.size}`}>
+                <CartItemRow item={item} />
+                {i < items.length - 1 && <div style={{ borderTop: '1px solid var(--ink-08)' }} />}
+              </React.Fragment>
+            ))}
+          </div>
+          <div style={{ borderTop: '1px solid var(--ink-08)' }} />
+        </div>
+
+        {/* Order Summary */}
+        <div style={{
+          width: isD(bp) ? 380 : '100%',
+          flexShrink: 0,
+          marginTop: isD(bp) ? 0 : 32,
+        }}>
+          <OrderSummary />
+        </div>
+      </div>
+      <ConservativeFooter />
+    </>
+  );
+}
+
 /* ===== ROUTE HELPERS ===== */
 function parseRoute(pathname) {
   const path = pathname || window.location.pathname;
   if (path === '/about') return { kind: 'about' };
+  if (path === '/cart') return { kind: 'cart' };
   if (path === '/ds') return { kind: 'ds' };
   if (path === '/ds-button') return { kind: 'ds-button' };
   const productMatch = path.match(/^\/product\/(.+)$/);
@@ -1303,6 +1511,7 @@ function parseRoute(pathname) {
   if (page === 'ds') return { kind: 'ds' };
   if (page === 'ds-button') return { kind: 'ds-button' };
   if (page === 'about') return { kind: 'about' };
+  if (page === 'cart') return { kind: 'cart' };
   const pid = params.get('product');
   if (pid) {
     const p = DC_DATA.featured.find((x) => x.id === pid);
@@ -1315,6 +1524,7 @@ function parseRoute(pathname) {
 function OasisApp() {
   const [route, setRoute] = React.useState(() => parseRoute());
   const [wishlist, toggleWish] = useWishlist('oasis-conservative');
+  const cart = useCart('oasis-cart');
   const [showToast, Toast] = useToast();
   const [transition, setTransition] = React.useState(null); // null | 'cover' | 'reveal'
   const pendingRoute = React.useRef(null);
@@ -1340,7 +1550,10 @@ function OasisApp() {
     }
   };
 
-  const onAdd = (p, qty = 1) => showToast(`已加入購物車：${p.name}${qty > 1 ? ' × ' + qty : ''}`);
+  const onAdd = (p, qty = 1, size = 'M') => {
+    cart.add(p, size, qty);
+    showToast(`已加入購物車：${p.name}${qty > 1 ? ' × ' + qty : ''}`);
+  };
   const onWish = (id) => {
     const wished = wishlist.has(id);
     toggleWish(id);
@@ -1373,15 +1586,17 @@ function OasisApp() {
     <ViewportProvider>
       <div className="oasis" style={{ background: 'var(--paper)', minHeight: '100vh', width: '100%' }}>
         {route.kind === 'home' ?
-          <ConservativeHome onOpen={onOpen} wishlist={wishlist} onWish={onWish} onAdd={onAdd} onHome={onHome} onNavigate={goPage} /> :
+          <ConservativeHome onOpen={onOpen} wishlist={wishlist} onWish={onWish} onAdd={onAdd} onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'about' ?
-          <AboutPage onHome={onHome} onNavigate={goPage} /> :
+          <AboutPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
+          route.kind === 'cart' ?
+          <CartPage cart={cart} onHome={onHome} onNavigate={goPage} showToast={showToast} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'ds' ?
           <DesignSystemPage onHome={onHome} onNavigate={goPage} /> :
           route.kind === 'ds-button' ?
           <DSButtonPage onHome={onHome} onDS={() => goPage('ds')} /> :
           <>
-            <ConservativeNav onHome={onHome} onNavigate={goPage} />
+            <ConservativeNav onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} />
             <ProductDetail product={route.product} onBack={onHome}
               onAdd={onAdd} onWish={onWish} wished={wishlist.has(route.product.id)} />
             <ConservativeFooter />

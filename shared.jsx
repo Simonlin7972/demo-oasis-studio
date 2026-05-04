@@ -49,6 +49,50 @@ function useWishlist(key = 'oasis-wishlist') {
   return [ids, toggle];
 }
 
+/* ---------- cart hook (localStorage) ---------- */
+function useCart(key = 'oasis-cart') {
+  const [items, setItems] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(key) || '[]'); }
+    catch { return []; }
+  });
+  const save = (next) => {
+    setItems(next);
+    try { localStorage.setItem(key, JSON.stringify(next)); } catch {}
+  };
+  const add = useCallback((product, size = 'M', qty = 1) => {
+    setItems(prev => {
+      const idx = prev.findIndex(i => i.id === product.id && i.size === size);
+      let next;
+      if (idx >= 0) {
+        next = prev.map((item, i) => i === idx ? { ...item, qty: item.qty + qty } : item);
+      } else {
+        next = [...prev, { id: product.id, name: product.name, price: product.price, img: product.img, size, qty }];
+      }
+      try { localStorage.setItem(key, JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }, [key]);
+  const updateQty = useCallback((id, size, qty) => {
+    setItems(prev => {
+      const next = qty <= 0
+        ? prev.filter(i => !(i.id === id && i.size === size))
+        : prev.map(i => (i.id === id && i.size === size) ? { ...i, qty } : i);
+      try { localStorage.setItem(key, JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }, [key]);
+  const remove = useCallback((id, size) => {
+    setItems(prev => {
+      const next = prev.filter(i => !(i.id === id && i.size === size));
+      try { localStorage.setItem(key, JSON.stringify(next)); } catch {}
+      return next;
+    });
+  }, [key]);
+  const totalItems = items.reduce((s, i) => s + i.qty, 0);
+  const totalPrice = items.reduce((s, i) => s + i.price * i.qty, 0);
+  return { items, add, updateQty, remove, totalItems, totalPrice };
+}
+
 /* ---------- carousel hook ---------- */
 function useCarousel(length, autoMs = 6000) {
   const [i, setI] = useState(0);
@@ -84,6 +128,7 @@ const Icon = {
   menu: (p) => <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" {...p}><path d="M3 6h14M3 10h14M3 14h14" strokeLinecap="round"/></svg>,
   play: (p) => <svg viewBox="0 0 20 20" fill="currentColor" {...p}><path d="M6 4l11 6-11 6z"/></svg>,
   leaf: (p) => <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.4" {...p}><path d="M3 17c0-7 5-13 14-14-1 9-7 14-14 14zM3 17c4-4 7-7 11-10" strokeLinecap="round" strokeLinejoin="round"/></svg>,
+  trash: (p) => <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.6" {...p}><path d="M4 5h12M8 5V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1m2 0v11a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V5h10z" strokeLinecap="round" strokeLinejoin="round"/><path d="M9 8v6M11 8v6" strokeLinecap="round"/></svg>,
 };
 
 /* ---------- price formatter ---------- */
@@ -114,5 +159,5 @@ function SafeImg({ src, alt = '', style, fallback = PLANT_FALLBACK, ...rest }) {
 
 /* expose */
 Object.assign(window, {
-  useCountdown, useToast, useWishlist, useCarousel, Icon, NT, SafeImg,
+  useCountdown, useToast, useWishlist, useCart, useCarousel, Icon, NT, SafeImg,
 });
