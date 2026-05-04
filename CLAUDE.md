@@ -16,12 +16,55 @@
 ## 檔案結構
 
 ```
-index.html    — 入口，載入字體 + React CDN + 各 script
-styles.css    — design tokens (CSS variables)、按鈕樣式、toast 動畫、全站直角覆蓋
-data.js       — 所有內容資料（品牌、商品、分類、情境、評價、指南），掛在 window.OASIS_DATA
-shared.jsx    — 共用 hooks (useCountdown, useToast, useWishlist, useCarousel) + Icon SVG 元件 + SafeImg + NT 格式化，掛在 window
-app.jsx       — 所有頁面元件 + ViewportProvider + 路由邏輯，掛在 window.OasisApp
+index.html              — 入口，載入字體 + React CDN + 各 script（依序載入）
+styles.css              — design tokens (CSS variables)、按鈕樣式、toast 動畫、全站直角���蓋
+│
+├── data/
+│   └── data.js         — 所有內容資料，掛在 window.OASIS_DATA
+│
+���── src/
+│   ├─�� app.jsx         — App Root：路由 + 全域 state + providers，掛在 window.OasisApp
+│   │
+│   ├── pages/          — 路由對應的頂層頁面
+│   │   ├── HomePage.jsx
+│   │   ├── ProductDetailPage.jsx
+│   │   ├── CartPage.jsx
+│   │   └── AboutPage.jsx
+│   │
+│   ├─�� components/
+│   │   ├─��� layout/     — 全站共用骨架
+│   │   │   ├── ViewportProvider.jsx  — ResizeObserver container-based breakpoints
+│   │   │   ├── Nav.jsx               — 響應式導覽列
+│   │   │   └── Footer.jsx
+│   │   │
+│   │   ├── sections/   — 首頁區塊元件
+│   │   │   ├── Hero.jsx, Promo.jsx, Featured.jsx
+│   │   │   ├── Categories.jsx, Scenarios.jsx
+│   │   │   └── Reviews.jsx, Guides.jsx
+│   │   │
+│   │   └── ui/         — 跨頁面可複用 UI
+│   │       ├── Icon.jsx, SafeImg.jsx, ProductCard.jsx
+│   │
+│   ├── hooks/          — 自訂 hooks（各一檔）
+│   │   ├── useCountdown.js, useToast.jsx, useWishlist.js
+│   │   └── useCart.js, useCarousel.js
+│   │
+│   └── utils/
+│       └── format.js   — NT() 價格格式化
+│
+├── design-system/      — DS 預覽 / 文件頁（非產品功能）
+│   ├── ds.jsx
+│   └── ds-button.jsx
+��
+├── tokens/             — Design tokens JSON
+│   ├── primitives.json
+│   └── semantics.json
+│
+└── docs/               — PRD、設計規範、handoff 文件
 ```
+
+所有元件透過 `window` 全域物件傳遞（Babel Standalone 無 module 支援）。
+`index.html` 中的 `<script>` 載入順序即為依賴順序：utils → ui → hooks → layout → sections → pages → app。
 
 ## 設計系統
 
@@ -78,8 +121,9 @@ app.jsx       — 所有頁面元件 + ViewportProvider + 路由邏輯，掛在 
 
 - 修改 styles.css 時注意 specificity 順序：底部的 `border-radius: 0 !important` 必須保持在最後
 - `.oasis button` 會 reset 所有按鈕的 background/padding/border，新增按鈕樣式需用 `.oasis .btn-*` 提升優先級
-- 商品資料集中在 `data.js` 的 `window.OASIS_DATA`，新增商品只需在 `featured` 陣列加入物件
-- 圖片來源為 Unsplash URL，若未來需替換為自有圖片，修改 `data.js` 中對應的 `img` / `img2` 欄位即可
+- 商品資料集中在 `data/data.js` 的 `window.OASIS_DATA`，新增商品只需在 `featured` 陣列加入物件
+- 圖片來源為 Unsplash URL，若未來需替換為自有圖片，修改 `data/data.js` 中對應的 `img` / `img2` 欄位即可
+- 新增元件時需在 `index.html` 中加入對應的 `<script type="text/babel">` 標籤，並注意依賴順序
 - 目前 Featured tab 篩選（新手友善/空間主角/寵物友善）僅切換 UI 狀態，尚未實作實際篩選邏輯
 
 ## Figma 同步規則

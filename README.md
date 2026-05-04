@@ -24,15 +24,23 @@
 ## 檔案結構
 
 ```
-index.html    — 入口，載入字體 + React CDN + 各 script
-styles.css    — design tokens (CSS variables)、按鈕樣式、toast 動畫
-data.js       — 所有內容資料（品牌、商品、分類、情境、評價、指南）
-shared.jsx    — 共用 hooks + Icon SVG 元件 + SafeImg + 工具函式
-app.jsx       — 所有頁面元件 + ViewportProvider + 路由邏輯
-ds.jsx        — Design System 預覽頁
-ds-button.jsx — Button component 預覽頁
-docs/         — PRD、設計規範、handoff 文件
-tokens/       — Design tokens JSON（primitives / semantics）
+index.html                — 入口，載入字體 + React CDN + 各 script
+styles.css                — design tokens、按鈕樣式、toast 動畫
+│
+├── src/
+│   ├── app.jsx           — App Root（路由 + 全域 state）
+│   ├── pages/            — 頁面元件（Home, ProductDetail, Cart, About）
+│   ├── components/
+│   │   ├── layout/       — Nav, Footer, ViewportProvider
+│   │   ├── sections/     — 首頁區塊（Hero, Promo, Featured...）
+│   │   └── ui/           — 可複用元件（Icon, SafeImg, ProductCard）
+│   ├── hooks/            — 自訂 hooks（useCart, useToast...）
+│   └── utils/            — 工具函式（NT 格式化）
+│
+├── data/                 — 靜態 mock 資料
+├── design-system/        — DS 預覽 / 文件頁
+├── tokens/               — Design tokens JSON
+└── docs/                 — PRD、設計規範文件
 ```
 
 ## 快速開始

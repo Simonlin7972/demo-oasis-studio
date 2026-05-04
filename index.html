@@ -15,11 +15,53 @@
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
   <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
-  <script src="data.js"></script>
-  <script type="text/babel" src="shared.jsx"></script>
-  <script type="text/babel" src="app.jsx"></script>
-  <script type="text/babel" src="ds.jsx"></script>
-  <script type="text/babel" src="ds-button.jsx"></script>
+
+  <!-- Data -->
+  <script src="data/data.js"></script>
+
+  <!-- Utils -->
+  <script type="text/babel" src="src/utils/format.js"></script>
+
+  <!-- UI Components (no deps on hooks) -->
+  <script type="text/babel" src="src/components/ui/Icon.jsx"></script>
+  <script type="text/babel" src="src/components/ui/SafeImg.jsx"></script>
+
+  <!-- Hooks -->
+  <script type="text/babel" src="src/hooks/useCountdown.js"></script>
+  <script type="text/babel" src="src/hooks/useToast.jsx"></script>
+  <script type="text/babel" src="src/hooks/useWishlist.js"></script>
+  <script type="text/babel" src="src/hooks/useCart.js"></script>
+  <script type="text/babel" src="src/hooks/useCarousel.js"></script>
+
+  <!-- Layout -->
+  <script type="text/babel" src="src/components/layout/ViewportProvider.jsx"></script>
+  <script type="text/babel" src="src/components/layout/Nav.jsx"></script>
+  <script type="text/babel" src="src/components/layout/Footer.jsx"></script>
+
+  <!-- UI Components (depend on hooks/layout) -->
+  <script type="text/babel" src="src/components/ui/ProductCard.jsx"></script>
+
+  <!-- Sections -->
+  <script type="text/babel" src="src/components/sections/Hero.jsx"></script>
+  <script type="text/babel" src="src/components/sections/Promo.jsx"></script>
+  <script type="text/babel" src="src/components/sections/Featured.jsx"></script>
+  <script type="text/babel" src="src/components/sections/Categories.jsx"></script>
+  <script type="text/babel" src="src/components/sections/Scenarios.jsx"></script>
+  <script type="text/babel" src="src/components/sections/Reviews.jsx"></script>
+  <script type="text/babel" src="src/components/sections/Guides.jsx"></script>
+
+  <!-- Pages -->
+  <script type="text/babel" src="src/pages/HomePage.jsx"></script>
+  <script type="text/babel" src="src/pages/ProductDetailPage.jsx"></script>
+  <script type="text/babel" src="src/pages/CartPage.jsx"></script>
+  <script type="text/babel" src="src/pages/AboutPage.jsx"></script>
+
+  <!-- Design System (documentation pages) -->
+  <script type="text/babel" src="design-system/ds.jsx"></script>
+  <script type="text/babel" src="design-system/ds-button.jsx"></script>
+
+  <!-- App Root -->
+  <script type="text/babel" src="src/app.jsx"></script>
 </head>
 <body>
   <div id="root"></div>
