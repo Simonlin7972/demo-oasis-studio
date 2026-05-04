@@ -1,0 +1,157 @@
+{
+  "surface": {
+    "default":          { "$value": "{color.paper.50}",         "$type": "color", "$description": "Page background" },
+    "container":        { "$value": "{color.cream.50}",         "$type": "color", "$description": "Card, section, hero background" },
+    "container-low":    { "$value": "{color.sage.100}",         "$type": "color", "$description": "Muted backgrounds — shipping info, tab pill container, tag pills" },
+    "container-high":   { "$value": "{color.sage.200}",         "$type": "color", "$description": "Image placeholders" },
+    "inverse":          { "$value": "{color.forest.800}",       "$type": "color", "$description": "Dark backgrounds — promo banner, buttons, toast" },
+    "inverse-strong":   { "$value": "{color.forest.900}",       "$type": "color", "$description": "Deepest dark — footer background" },
+    "overlay":          { "$value": "{color.alpha.forest.50}",  "$type": "color", "$description": "Drawer/modal overlay backdrop" },
+    "scrim":            { "$value": "{color.alpha.forest.85}",  "$type": "color", "$description": "Image overlay labels (hero badge)" },
+    "hover":            { "$value": "{color.alpha.white.95}",   "$type": "color", "$description": "Hover badges on images" }
+  },
+
+  "content": {
+    "primary":          { "$value": "{color.forest.900}",       "$type": "color", "$description": "Headlines, product names, high-emphasis text" },
+    "secondary":        { "$value": "{color.alpha.ink.60}",     "$type": "color", "$description": "Body text, descriptions, secondary labels" },
+    "tertiary":         { "$value": "{color.alpha.ink.40}",     "$type": "color", "$description": "Latin names, original price strikethrough, faint text" },
+    "disabled":         { "$value": "{color.alpha.ink.15}",     "$type": "color", "$description": "Disabled text (reserved)" },
+    "brand":            { "$value": "{color.forest.800}",       "$type": "color", "$description": "Brand-colored text — prices, active links" },
+    "accent":           { "$value": "{color.forest.600}",       "$type": "color", "$description": "Stars, attribute icons, category labels" },
+    "link":             { "$value": "{color.forest.600}",       "$type": "color", "$description": "Text links" },
+    "on-inverse":       { "$value": "{color.cream.50}",         "$type": "color", "$description": "Text on dark backgrounds — buttons, promo, footer title" },
+    "on-inverse-secondary": { "$value": "{color.alpha.white.70}", "$type": "color", "$description": "Secondary text on dark — promo body, footer links" },
+    "on-inverse-tertiary":  { "$value": "{color.alpha.white.60}", "$type": "color", "$description": "Tertiary text on dark — counter labels, footer body" },
+    "on-inverse-faint":     { "$value": "{color.alpha.white.50}", "$type": "color", "$description": "Faintest on dark — copyright" },
+    "on-inverse-muted":     { "$value": "{color.alpha.white.30}", "$type": "color", "$description": "Countdown separators on dark" },
+    "on-inverse-label":     { "$value": "{color.sage.300}",       "$type": "color", "$description": "Labels on dark — promo label, footer section headers" },
+    "error":            { "$value": "{color.error.500}",        "$type": "color", "$description": "Error messages" }
+  },
+
+  "primary": {
+    "default":          { "$value": "{color.forest.800}",       "$type": "color", "$description": "Primary action fill — buttons, logo bg, cart icon bg" },
+    "hover":            { "$value": "{color.forest.900}",       "$type": "color", "$description": "Primary action hover state" },
+    "on-primary":       { "$value": "{color.cream.50}",         "$type": "color", "$description": "Text/icons on primary color" },
+    "container":        { "$value": "{color.cream.50}",         "$type": "color", "$description": "Inverted primary — CTA on dark bg (promo button)" },
+    "on-container":     { "$value": "{color.forest.800}",       "$type": "color", "$description": "Text on primary container" }
+  },
+
+  "secondary": {
+    "default":          { "$value": "#00000000",                "$type": "color", "$description": "Secondary action fill — transparent" },
+    "hover":            { "$value": "{color.forest.800}",       "$type": "color", "$description": "Secondary action hover — fills with primary" },
+    "border":           { "$value": "{color.forest.800}",       "$type": "color", "$description": "Secondary action border" },
+    "on-secondary":     { "$value": "{color.forest.800}",       "$type": "color", "$description": "Text on secondary (default state)" },
+    "on-secondary-hover": { "$value": "{color.cream.50}",      "$type": "color", "$description": "Text on secondary (hover state)" }
+  },
+
+  "outline": {
+    "default":          { "$value": "{color.alpha.ink.08}",     "$type": "color", "$description": "Default borders — nav, cards, section dividers" },
+    "variant":          { "$value": "{color.alpha.ink.15}",     "$type": "color", "$description": "Stronger dividers — tab border, unselected controls" },
+    "strong":           { "$value": "{color.forest.800}",       "$type": "color", "$description": "Active borders — nav active, selected thumbnail, selected size" },
+    "inverse":          { "$value": "{color.alpha.white.10}",   "$type": "color", "$description": "Borders on dark backgrounds — footer divider, promo code pill" },
+    "transparent":      { "$value": "#00000000",                "$type": "color", "$description": "Transparent border — unselected thumbnail, ghost button" }
+  },
+
+  "state": {
+    "selected":         { "$value": "{color.forest.800}",       "$type": "color", "$description": "Selected control fill — size selector, active tab indicator" },
+    "on-selected":      { "$value": "{color.cream.50}",         "$type": "color", "$description": "Text on selected state" },
+    "unselected":       { "$value": "{color.paper.50}",         "$type": "color", "$description": "Unselected control fill — size selector default" },
+    "on-unselected":    { "$value": "{color.forest.900}",       "$type": "color", "$description": "Text on unselected state" },
+    "active-indicator": { "$value": "{color.forest.800}",       "$type": "color", "$description": "Active tab underline, nav active indicator" },
+    "inactive":         { "$value": "{color.alpha.ink.60}",     "$type": "color", "$description": "Inactive tab text, inactive toggle" },
+    "wishlist-off":     { "$value": "{color.alpha.ink.60}",     "$type": "color", "$description": "Wishlist heart — not saved" },
+    "wishlist-on":      { "$value": "{color.accent.500}",       "$type": "color", "$description": "Wishlist heart — saved" },
+    "star":             { "$value": "{color.forest.600}",       "$type": "color", "$description": "Rating star fill" },
+    "tag-bg":           { "$value": "{color.cream.50}",         "$type": "color", "$description": "Product tag pill background" },
+    "tag-text":         { "$value": "{color.forest.800}",       "$type": "color", "$description": "Product tag pill text" },
+    "badge-bg":         { "$value": "{color.sage.100}",         "$type": "color", "$description": "Scenario/category tag pill background" },
+    "badge-text":       { "$value": "{color.forest.800}",       "$type": "color", "$description": "Scenario/category tag pill text" }
+  },
+
+  "elevation": {
+    "card":             { "$value": "{shadow.card}",            "$type": "string", "$description": "Product card hover shadow" },
+    "toast":            { "$value": "{shadow.toast}",           "$type": "string", "$description": "Toast notification shadow" }
+  },
+
+  "spacing": {
+    "page-x": {
+      "desktop":        { "$value": "{space.18}",               "$type": "dimension" },
+      "tablet":         { "$value": "{space.14}",               "$type": "dimension" },
+      "mobile":         { "$value": "{space.10}",               "$type": "dimension" }
+    },
+    "section-y": {
+      "desktop":        { "$value": "{space.17}",               "$type": "dimension" },
+      "mobile":         { "$value": "{space.14}",               "$type": "dimension" }
+    },
+    "section-y-lg": {
+      "desktop":        { "$value": "{space.20}",               "$type": "dimension" },
+      "mobile":         { "$value": "{space.17}",               "$type": "dimension" }
+    },
+    "card-padding": {
+      "desktop":        { "$value": "{space.8}",                "$type": "dimension" },
+      "mobile":         { "$value": "{space.6}",                "$type": "dimension" }
+    },
+    "grid-gap": {
+      "desktop":        { "$value": "{space.12}",               "$type": "dimension" },
+      "mobile":         { "$value": "{space.6}",                "$type": "dimension" }
+    },
+    "btn-padding-y":    { "$value": "{space.7}",                "$type": "dimension" },
+    "btn-padding-x":    { "$value": "{space.13}",               "$type": "dimension" },
+    "btn-gap":          { "$value": "{space.4}",                "$type": "dimension" }
+  },
+
+  "typography": {
+    "display": {
+      "family":         { "$value": "{fontFamily.serif}",       "$type": "string" },
+      "weight":         { "$value": "{fontWeight.semibold}",    "$type": "number" },
+      "size-lg":        { "$value": "{fontSize.48}",            "$type": "dimension" },
+      "size-md":        { "$value": "{fontSize.40}",            "$type": "dimension" },
+      "size-sm":        { "$value": "{fontSize.32}",            "$type": "dimension" },
+      "line-height":    { "$value": "{lineHeight.tight}",       "$type": "number" }
+    },
+    "headline": {
+      "family":         { "$value": "{fontFamily.serif}",       "$type": "string" },
+      "weight":         { "$value": "{fontWeight.semibold}",    "$type": "number" },
+      "size-lg":        { "$value": "{fontSize.36}",            "$type": "dimension" },
+      "size-md":        { "$value": "{fontSize.32}",            "$type": "dimension" },
+      "size-sm":        { "$value": "{fontSize.24}",            "$type": "dimension" },
+      "line-height":    { "$value": "{lineHeight.snug}",        "$type": "number" }
+    },
+    "title": {
+      "family":         { "$value": "{fontFamily.serif}",       "$type": "string" },
+      "weight":         { "$value": "{fontWeight.semibold}",    "$type": "number" },
+      "size-lg":        { "$value": "{fontSize.22}",            "$type": "dimension" },
+      "size-md":        { "$value": "{fontSize.18}",            "$type": "dimension" },
+      "size-sm":        { "$value": "{fontSize.15}",            "$type": "dimension" }
+    },
+    "label": {
+      "family":         { "$value": "{fontFamily.mono}",        "$type": "string" },
+      "weight":         { "$value": "{fontWeight.regular}",     "$type": "number" },
+      "size-lg":        { "$value": "{fontSize.13}",            "$type": "dimension" },
+      "size-md":        { "$value": "{fontSize.11}",            "$type": "dimension" },
+      "size-sm":        { "$value": "{fontSize.9}",             "$type": "dimension" },
+      "tracking":       { "$value": "{letterSpacing.eyebrow}",  "$type": "dimension" }
+    },
+    "body": {
+      "family":         { "$value": "{fontFamily.sans}",        "$type": "string" },
+      "weight":         { "$value": "{fontWeight.regular}",     "$type": "number" },
+      "size-lg":        { "$value": "{fontSize.15}",            "$type": "dimension" },
+      "size-md":        { "$value": "{fontSize.14}",            "$type": "dimension" },
+      "size-sm":        { "$value": "{fontSize.13}",            "$type": "dimension" },
+      "line-height":    { "$value": "{lineHeight.prose}",       "$type": "number" }
+    },
+    "button": {
+      "family":         { "$value": "{fontFamily.sans}",        "$type": "string" },
+      "weight":         { "$value": "{fontWeight.medium}",      "$type": "number" },
+      "size":           { "$value": "{fontSize.14}",            "$type": "dimension" }
+    },
+    "data": {
+      "family":         { "$value": "{fontFamily.mono}",        "$type": "string" },
+      "weight":         { "$value": "{fontWeight.semibold}",    "$type": "number" },
+      "size-lg":        { "$value": "{fontSize.32}",            "$type": "dimension" },
+      "size-md":        { "$value": "{fontSize.17}",            "$type": "dimension" },
+      "size-sm":        { "$value": "{fontSize.14}",            "$type": "dimension" },
+      "tracking":       { "$value": "{letterSpacing.mono}",     "$type": "dimension" }
+    }
+  }
+}
