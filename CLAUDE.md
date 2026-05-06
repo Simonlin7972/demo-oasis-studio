@@ -147,6 +147,25 @@ styles.css              — design tokens (CSS variables)、按鈕樣式、toast
 - Icons frame：包含 12 個 icon components（`icon-search`, `icon-cart`, `icon-heart`, `icon-arrow`, `icon-arrow-left`, `icon-star`, `icon-sun`, `icon-drop`, `icon-pet`, `icon-menu`, `icon-play`, `icon-leaf`）
 - Button component set：`85:38`
 
+## Figma Token Rebind 工作流程
+
+將設計從 code push 到 Figma 後，顏色預設為 raw hex。使用 `scripts/figma-rebind-tokens.js` 自動綁定到 Figma variables。
+
+### 流程
+1. 用 `generate_figma_design` 或 `use_figma` 推設計到 Figma（產生 raw hex）
+2. 取得新建 frame 的 node ID
+3. 透過 `use_figma` 執行 rebind 腳本（將 `TARGET_ID` 替換為實際 node ID）
+4. 腳本會自動根據 context 綁定正確的 semantic variable：
+   - TEXT fills → `content/*`（如 `content/primary`, `content/secondary`）
+   - Button fills → `primary/*`（如 `primary/default`）
+   - Frame/shape fills → `surface/*`（如 `surface/inverse`, `surface/container`）
+   - Strokes → `outline/*`（如 `outline/default`, `outline/strong`）
+   - 未命中語義 → 退回 `primitives`（如 `color/forest/800`）
+5. 已綁定 variable 的 paint 自動跳過（可安全重複執行）
+
+### Button 偵測
+節點名稱含 `btn`、`button`、`cta` 視為按鈕，往上查兩層父節點。
+
 ## 未來可能的方向
 - 購物車側邊抽屜
 - 商品列表頁（篩選 / 排序）
