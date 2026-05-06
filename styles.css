@@ -25,7 +25,9 @@
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-.oasis * { box-sizing: border-box; }
+.oasis * {
+  box-sizing: border-box;
+}
 
 .oasis {
   font-family: var(--font-sans);
@@ -34,67 +36,150 @@
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-.oasis img { display: block; max-width: 100%; }
-.oasis button { font-family: inherit; cursor: pointer !important; border: none; background: none; padding: 0; color: inherit; }
-.oasis a { color: inherit; text-decoration: none; cursor: pointer; }
-.oasis button, .oasis a { -webkit-user-select: none; user-select: none; }
 
-.serif { font-family: var(--font-serif); }
-.mono { font-family: var(--font-mono); letter-spacing: 0.02em; }
-.eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-60); }
+.oasis img {
+  display: block;
+  max-width: 100%;
+}
+
+.oasis button {
+  font-family: inherit;
+  cursor: pointer !important;
+  border: none;
+  background: none;
+  padding: 0;
+  color: inherit;
+}
+
+.oasis a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.oasis button,
+.oasis a {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.serif {
+  font-family: var(--font-serif);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
 
 /* Buttons (sharp corners) — specificity bumped to win over `.oasis button` */
 .oasis .btn-primary,
 .btn-primary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--forest-800); color: var(--cream-50);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--forest-800);
+  color: var(--cream-50);
   padding: 14px 26px;
-  font-size: 14px; font-weight: 500;
+  font-size: 14px;
+  font-weight: 500;
   transition: background .15s, transform .15s;
 }
-.oasis .btn-primary:hover, .btn-primary:hover { background: var(--forest-900); }
-.oasis .btn-primary:active, .btn-primary:active { transform: scale(.98); }
+
+.oasis .btn-primary:hover,
+.btn-primary:hover {
+  background: var(--forest-900);
+}
+
+.oasis .btn-primary:active,
+.btn-primary:active {
+  transform: scale(.98);
+}
 
 .oasis .btn-ghost,
 .btn-ghost {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--forest-800); padding: 14px 22px;
-  font-size: 14px; font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--forest-800);
+  padding: 14px 22px;
+  font-size: 14px;
+  font-weight: 500;
   border-bottom: 1px solid transparent;
   background: none;
   transition: border-color .15s;
 }
-.oasis .btn-ghost:hover, .btn-ghost:hover { border-color: var(--forest-800); }
+
+.oasis .btn-ghost:hover,
+.btn-ghost:hover {
+  border-color: var(--forest-800);
+}
 
 /* Secondary: outlined, same height/weight as primary */
 .oasis .btn-secondary,
 .btn-secondary {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: transparent; color: var(--forest-800);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--forest-800);
   padding: 13px 25px;
   border: 1px solid var(--forest-800);
-  font-size: 14px; font-weight: 500;
+  font-size: 14px;
+  font-weight: 500;
   transition: background .15s, color .15s;
 }
-.oasis .btn-secondary:hover, .btn-secondary:hover {
-  background: var(--forest-800); color: var(--cream-50);
-}
-.oasis .btn-secondary:active, .btn-secondary:active { transform: scale(.98); }
 
-.img-fallback { background: linear-gradient(135deg, var(--sage-200), var(--sage-300)); }
+.oasis .btn-secondary:hover,
+.btn-secondary:hover {
+  background: var(--sage-200);
+}
+
+.oasis .btn-secondary:active,
+.btn-secondary:active {
+  transform: scale(.98);
+}
+
+.img-fallback {
+  background: linear-gradient(135deg, var(--sage-200), var(--sage-300));
+}
 
 /* Toast */
 @keyframes oasis-toast-in {
-  from { transform: translate(-50%, -16px); opacity: 0; }
-  to { transform: translate(-50%, 0); opacity: 1; }
+  from {
+    transform: translate(-50%, -16px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
 }
+
 .oasis-toast {
-  position: fixed; top: 24px; left: 50%; transform: translateX(-50%);
-  background: var(--forest-800); color: var(--cream-50);
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--forest-800);
+  color: var(--cream-50);
   padding: 12px 22px;
-  font-size: 13px; font-weight: 500;
-  z-index: 9999; animation: oasis-toast-in .25s ease-out;
-  display: flex; align-items: center; gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 9999;
+  animation: oasis-toast-in .25s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 10px;
   box-shadow: 0 8px 24px rgba(20, 39, 30, .25);
 }
 
@@ -103,6 +188,7 @@
   position: relative;
   border-bottom: none !important;
 }
+
 .oasis .nav-link::after {
   content: '';
   position: absolute;
@@ -113,15 +199,18 @@
   background: var(--forest-800);
   transition: width .25s ease, left .25s ease;
 }
+
 .oasis .nav-link:hover::after,
 .oasis .nav-link.active::after {
   width: 100%;
   left: 0;
 }
+
 .oasis .nav-link.active::after {
   width: 100%;
   left: 0;
 }
+
 /* When nav is scrolled (dark mode), underline becomes light */
 .oasis .nav-link.nav-scrolled::after {
   background: var(--cream-50);
@@ -129,21 +218,37 @@
 
 /* Page transition overlay */
 @keyframes oasis-transition-up {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
+
 @keyframes oasis-transition-reveal {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-100%); }
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
 }
+
 .oasis-transition-overlay {
-  position: fixed; inset: 0; z-index: 9998;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
   background: var(--forest-800);
   pointer-events: none;
 }
+
 .oasis-transition-overlay.phase-cover {
   animation: oasis-transition-up .45s cubic-bezier(.4, 0, .2, 1) forwards;
 }
+
 .oasis-transition-overlay.phase-reveal {
   animation: oasis-transition-reveal .45s cubic-bezier(.4, 0, .2, 1) forwards;
 }
