@@ -43,7 +43,7 @@ styles.css              — design tokens (CSS variables)、按鈕樣式、toast
 │   │   │   └── Reviews.jsx, Guides.jsx
 │   │   │
 │   │   └── ui/         — 跨頁面可複用 UI
-│   │       ├── Icon.jsx, SafeImg.jsx, ProductCard.jsx
+│   │       ├── Icon.jsx, SafeImg.jsx, ProductCard.jsx, button.jsx
 │   │
 │   ├── hooks/          — 自訂 hooks（各一檔）
 │   │   ├── useCountdown.js, useToast.jsx, useWishlist.js
@@ -53,8 +53,7 @@ styles.css              — design tokens (CSS variables)、按鈕樣式、toast
 │       └── format.js   — NT() 價格格式化
 │
 ├── design-system/      — DS 預覽 / 文件頁（非產品功能）
-│   ├── ds.jsx
-│   └── ds-button.jsx
+│   └── ds.jsx
 ��
 ├── tokens/             — Design tokens JSON
 │   ├── primitives.json
