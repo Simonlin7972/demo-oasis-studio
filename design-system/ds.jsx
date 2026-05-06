@@ -33,21 +33,64 @@ function DesignSystemPage({ onHome, onNavigate }) {
 
   const colors = {
     'Forest (主色)': [
-      { name: 'forest-900', value: '#14271e' },
-      { name: 'forest-800', value: '#1f3a2e' },
-      { name: 'forest-700', value: '#2a4a3a' },
-      { name: 'forest-600', value: '#3a6b4a' },
+      { name: 'forest-50', value: '#edf4ef' },
+      { name: 'forest-100', value: '#d9e9dd' },
+      { name: 'forest-200', value: '#bbdac2' },
+      { name: 'forest-300', value: '#96c4a0' },
+      { name: 'forest-400', value: '#72a87a' },
       { name: 'forest-500', value: '#5b8a5a' },
+      { name: 'forest-600', value: '#3a6b4a' },
+      { name: 'forest-700', value: '#2a4a3a' },
+      { name: 'forest-800', value: '#1f3a2e' },
+      { name: 'forest-900', value: '#14271e' },
     ],
     'Sage (輔助)': [
-      { name: 'sage-300', value: '#c9d5b5' },
-      { name: 'sage-200', value: '#dde3cd' },
+      { name: 'sage-50', value: '#f3f5ed' },
       { name: 'sage-100', value: '#e9ede0' },
+      { name: 'sage-200', value: '#dde3cd' },
+      { name: 'sage-300', value: '#c9d5b5' },
+      { name: 'sage-400', value: '#b0c298' },
+      { name: 'sage-500', value: '#96ad7c' },
+      { name: 'sage-600', value: '#7c9564' },
+      { name: 'sage-700', value: '#627a4e' },
+      { name: 'sage-800', value: '#4a5e3b' },
+      { name: 'sage-900', value: '#34432a' },
     ],
     'Cream (背景)': [
-      { name: 'cream-100', value: '#ebe8df' },
       { name: 'cream-50', value: '#f4f6ee' },
-      { name: 'paper', value: '#fafaf6' },
+      { name: 'cream-100', value: '#ebe8df' },
+      { name: 'cream-200', value: '#ddd9cc' },
+      { name: 'cream-300', value: '#cdc7b6' },
+      { name: 'cream-400', value: '#b8b09d' },
+      { name: 'cream-500', value: '#a29985' },
+      { name: 'cream-600', value: '#8a806d' },
+      { name: 'cream-700', value: '#6e6556' },
+      { name: 'cream-800', value: '#524c41' },
+      { name: 'cream-900', value: '#38342d' },
+    ],
+    'Accent (強調)': [
+      { name: 'accent-50', value: '#fdf2ee' },
+      { name: 'accent-100', value: '#fbe3da' },
+      { name: 'accent-200', value: '#f5c4b2' },
+      { name: 'accent-300', value: '#efa58a' },
+      { name: 'accent-400', value: '#e48e6e' },
+      { name: 'accent-500', value: '#d97757' },
+      { name: 'accent-600', value: '#c4603f' },
+      { name: 'accent-700', value: '#a34b31' },
+      { name: 'accent-800', value: '#7f3a26' },
+      { name: 'accent-900', value: '#5e2b1c' },
+    ],
+    'Error (錯誤)': [
+      { name: 'error-50', value: '#fdf1f0' },
+      { name: 'error-100', value: '#f9dedd' },
+      { name: 'error-200', value: '#f0b5b3' },
+      { name: 'error-300', value: '#e08c89' },
+      { name: 'error-400', value: '#cc6e6b' },
+      { name: 'error-500', value: '#b85450' },
+      { name: 'error-600', value: '#9c3f3c' },
+      { name: 'error-700', value: '#7e302e' },
+      { name: 'error-800', value: '#612422' },
+      { name: 'error-900', value: '#451918' },
     ],
     'Ink (文字)': [
       { name: 'ink', value: '#14271e' },
@@ -56,9 +99,9 @@ function DesignSystemPage({ onHome, onNavigate }) {
       { name: 'ink-15', value: 'rgba(20,39,30,0.15)' },
       { name: 'ink-08', value: 'rgba(20,39,30,0.08)' },
     ],
-    '強調 / 狀態': [
-      { name: 'accent', value: '#d97757' },
-      { name: 'error', value: '#b85450' },
+    'Paper / White': [
+      { name: 'paper', value: '#fafaf6' },
+      { name: 'white', value: '#ffffff' },
     ],
   };
 
@@ -111,8 +154,8 @@ function DesignSystemPage({ onHome, onNavigate }) {
             <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--forest-900)', marginBottom: 14 }}>{group}</div>
             <div style={{
               display: 'grid',
-              gridTemplateColumns: m ? 'repeat(3, 1fr)' : `repeat(${Math.min(swatches.length, 5)}, 1fr)`,
-              gap: m ? 10 : 16
+              gridTemplateColumns: m ? 'repeat(5, 1fr)' : `repeat(${Math.min(swatches.length, 10)}, 1fr)`,
+              gap: m ? 6 : 10
             }}>
               {swatches.map((s) => <Swatch key={s.name} {...s} />)}
             </div>
