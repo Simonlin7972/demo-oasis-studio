@@ -2,7 +2,7 @@
 
 const DC_DATA = window.OASIS_DATA;
 
-function GuidesPage({ onHome, onNavigate, cartCount, onCart }) {
+function GuidesPage({ onHome, onNavigate, cartCount, onCart, onOpenGuide }) {
   const { bp } = useViewport();
   const guides = DC_DATA.guides;
   const categories = ['全部', '新手指南', '養護技巧', '空間靈感'];
@@ -73,7 +73,7 @@ function GuidesPage({ onHome, onNavigate, cartCount, onCart }) {
           gap: gridGap
         }}>
           {filtered.map((g) => (
-            <a key={g.id} href="#" onClick={(e) => e.preventDefault()} style={{ display: 'block' }}>
+            <a key={g.id} href="#" onClick={(e) => { e.preventDefault(); if (onOpenGuide) onOpenGuide(g); }} style={{ display: 'block' }}>
               <div style={{
                 aspectRatio: '1.1',
                 background: 'var(--sage-200)',

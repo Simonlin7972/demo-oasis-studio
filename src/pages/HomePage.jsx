@@ -1,6 +1,6 @@
 // Homepage — composes all homepage sections
 
-function HomePage({ onOpen, wishlist, onWish, onAdd, onHome, onNavigate, cartCount, onCart }) {
+function HomePage({ onOpen, onOpenGuide, wishlist, onWish, onAdd, onHome, onNavigate, cartCount, onCart }) {
   return (
     <>
       <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} activePage="home" />
@@ -11,7 +11,7 @@ function HomePage({ onOpen, wishlist, onWish, onAdd, onHome, onNavigate, cartCou
       <Categories />
       <Scenarios />
       <Reviews />
-      <Guides />
+      <Guides onOpenGuide={onOpenGuide} />
       <Footer />
     </>
   );

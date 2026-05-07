@@ -2,7 +2,7 @@
 
 const DC_DATA = window.OASIS_DATA;
 
-function Guides() {
+function Guides({ onOpenGuide }) {
   const { bp } = useViewport();
   const cols = isM(bp) ? '1fr' : isT(bp) ? 'repeat(3, 1fr)' : 'repeat(3, 1fr)';
   return (
@@ -21,7 +21,7 @@ function Guides() {
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: cols, gap: isM(bp) ? 18 : 24 }}>
         {DC_DATA.guides.map((g) =>
-          <a key={g.id} href="#" style={{ display: 'block' }}>
+          <a key={g.id} href="#" onClick={(e) => { e.preventDefault(); if (onOpenGuide) onOpenGuide(g); }} style={{ display: 'block' }}>
             <div style={{ aspectRatio: '1.4', background: 'var(--sage-200)', borderRadius: 12, overflow: 'hidden', marginBottom: 14 }}>
               <SafeImg src={g.img} alt={g.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>

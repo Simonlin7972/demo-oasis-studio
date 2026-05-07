@@ -8,6 +8,11 @@ function parseRoute(pathname) {
   if (path === '/about') return { kind: 'about' };
   if (path === '/stores') return { kind: 'stores' };
   if (path === '/guides') return { kind: 'guides' };
+  const guideMatch = path.match(/^\/guides\/(.+)$/);
+  if (guideMatch) {
+    const g = DC_DATA.guides.find((x) => x.id === guideMatch[1]);
+    if (g) return { kind: 'guide-detail', guide: g };
+  }
   if (path === '/cart') return { kind: 'cart' };
   if (path === '/ds') return { kind: 'ds' };
   if (path === '/ds-button') return { kind: 'ds-button' };
@@ -85,6 +90,11 @@ function OasisApp() {
       window.history.pushState({}, '', `/${page}`);
     });
   };
+  const onOpenGuide = (g) => {
+    navigateWithTransition({ kind: 'guide-detail', guide: g }, () => {
+      window.history.pushState({}, '', `/guides/${g.id}`);
+    });
+  };
 
   React.useEffect(() => {
     const handler = () => setRoute(parseRoute());
@@ -96,13 +106,15 @@ function OasisApp() {
     <ViewportProvider>
       <div className="oasis" style={{ background: 'var(--paper)', minHeight: '100vh', width: '100%' }}>
         {route.kind === 'home' ?
-          <HomePage onOpen={onOpen} wishlist={wishlist} onWish={onWish} onAdd={onAdd} onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
+          <HomePage onOpen={onOpen} onOpenGuide={onOpenGuide} wishlist={wishlist} onWish={onWish} onAdd={onAdd} onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'about' ?
           <AboutPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'stores' ?
           <StoresPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'guides' ?
-          <GuidesPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
+          <GuidesPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} onOpenGuide={onOpenGuide} /> :
+          route.kind === 'guide-detail' ?
+          <GuideDetailPage guide={route.guide} onBack={() => goPage('guides')} onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} onOpenGuide={onOpenGuide} /> :
           route.kind === 'cart' ?
           <CartPage cart={cart} onHome={onHome} onNavigate={goPage} showToast={showToast} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'ds' ?
