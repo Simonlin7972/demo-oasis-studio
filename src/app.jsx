@@ -7,6 +7,7 @@ function parseRoute(pathname) {
   const path = pathname || window.location.pathname;
   if (path === '/about') return { kind: 'about' };
   if (path === '/stores') return { kind: 'stores' };
+  if (path === '/guides') return { kind: 'guides' };
   if (path === '/cart') return { kind: 'cart' };
   if (path === '/ds') return { kind: 'ds' };
   if (path === '/ds-button') return { kind: 'ds-button' };
@@ -22,6 +23,7 @@ function parseRoute(pathname) {
   if (page === 'ds-button') return { kind: 'ds-button' };
   if (page === 'about') return { kind: 'about' };
   if (page === 'stores') return { kind: 'stores' };
+  if (page === 'guides') return { kind: 'guides' };
   if (page === 'cart') return { kind: 'cart' };
   const pid = params.get('product');
   if (pid) {
@@ -99,6 +101,8 @@ function OasisApp() {
           <AboutPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'stores' ?
           <StoresPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
+          route.kind === 'guides' ?
+          <GuidesPage onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'cart' ?
           <CartPage cart={cart} onHome={onHome} onNavigate={goPage} showToast={showToast} cartCount={cart.totalItems} onCart={() => goPage('cart')} /> :
           route.kind === 'ds' ?

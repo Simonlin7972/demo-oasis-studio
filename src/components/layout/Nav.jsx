@@ -3,7 +3,7 @@
 const DC_DATA = window.OASIS_DATA;
 
 function Nav({ onHome, onNavigate, cartCount = 0, onCart, activePage = 'home' }) {
-  const navPageMap = { '首頁': 'home', '門市': 'stores', '關於我們': 'about' };
+  const navPageMap = { '首頁': 'home', '養護指南': 'guides', '門市': 'stores', '關於我們': 'about' };
   const isActive = (label) => navPageMap[label] === activePage;
   const { bp } = useViewport();
   const [open, setOpen] = React.useState(false);
@@ -93,6 +93,7 @@ function Nav({ onHome, onNavigate, cartCount = 0, onCart, activePage = 'home' })
                       e.preventDefault();
                       closeMenu();
                       if (i === 0) { onHome(); }
+                      else if (n === '養護指南' && onNavigate) { onNavigate('guides'); }
                       else if (n === '門市' && onNavigate) { onNavigate('stores'); }
                       else if (n === '關於我們' && onNavigate) { onNavigate('about'); }
                     }} style={{
@@ -140,6 +141,7 @@ function Nav({ onHome, onNavigate, cartCount = 0, onCart, activePage = 'home' })
           <a key={i} href="#" onClick={(e) => {
             e.preventDefault();
             if (i === 0) { onHome(); }
+            else if (n === '養護指南' && onNavigate) { onNavigate('guides'); }
             else if (n === '門市' && onNavigate) { onNavigate('stores'); }
             else if (n === '關於我們' && onNavigate) { onNavigate('about'); }
           }} className={`nav-link${isActive(n) ? ' active' : ''}${scrolled ? ' nav-scrolled' : ''}`} style={{

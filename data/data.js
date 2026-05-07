@@ -187,9 +187,12 @@ window.OASIS_DATA = {
 
   // Blog / care guide
   guides: [
-    { id: 'g1', cat: '新手指南', title: '第一盆植物該怎麼選？', sub: '從生活作息、空間光線、性格三個角度切入', read: '5 分鐘', img: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80' },
-    { id: 'g2', cat: '養護技巧', title: '澆水其實是一門哲學', sub: '為什麼「定期澆水」反而是壞習慣？', read: '7 分鐘', img: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=600&q=80' },
-    { id: 'g3', cat: '空間靈感', title: '十坪小套房植物配置法', sub: '三盆植物，三種高度，撐起整個客廳', read: '6 分鐘', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600&q=80' },
+    { id: 'g1', cat: '新手指南', title: '第一盆植物該怎麼選？', sub: '從生活作息、空間光線、性格三個角度切入，找到最適合你的第一盆植物。', read: '5 分鐘', img: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80' },
+    { id: 'g2', cat: '養護技巧', title: '澆水其實是一門哲學', sub: '為什麼「定期澆水」反而是壞習慣？學會觀察土壤，才是養活植物的關鍵。', read: '7 分鐘', img: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=600&q=80' },
+    { id: 'g3', cat: '空間靈感', title: '十坪小套房植物配置法', sub: '三盆植物，三種高度，撐起整個客廳的綠意氛圍。', read: '6 分鐘', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600&q=80' },
+    { id: 'g4', cat: '新手指南', title: '植物買回家的前 72 小時', sub: '環境適應期是存活關鍵，別急著換盆、施肥，讓植物慢慢適應新家。', read: '4 分鐘', img: 'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=600&q=80' },
+    { id: 'g5', cat: '養護技巧', title: '黃葉不一定是缺水', sub: '常見的五種黃葉原因與對策，幫你精準判斷植物的健康狀態。', read: '5 分鐘', img: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=600&q=80' },
+    { id: 'g6', cat: '空間靈感', title: '辦公桌上的小森林', sub: '三種適合辦公室的桌上植物組合，讓你的工作空間也能呼吸。', read: '8 分鐘', img: 'https://images.unsplash.com/photo-1567748157439-651aca2ff064?w=600&q=80' },
   ],
 
   // Store locations
