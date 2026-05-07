@@ -50,7 +50,7 @@ function AboutPage({ onHome, onNavigate, cartCount, onCart }) {
 
   return (
     <>
-      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
+      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} activePage="about" />
 
       {/* Hero */}
       <Section bg="var(--cream-50)" py={isM(bp) ? 56 : isT(bp) ? 72 : 96}>

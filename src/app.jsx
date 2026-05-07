@@ -106,7 +106,7 @@ function OasisApp() {
           route.kind === 'ds-button' ?
           <DSButtonPage onHome={onHome} onDS={() => goPage('ds')} /> :
           <>
-            <Nav onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} />
+            <Nav onHome={onHome} onNavigate={goPage} cartCount={cart.totalItems} onCart={() => goPage('cart')} activePage="product" />
             <ProductDetailPage product={route.product} onBack={onHome}
               onAdd={onAdd} onWish={onWish} wished={wishlist.has(route.product.id)} />
             <Footer />

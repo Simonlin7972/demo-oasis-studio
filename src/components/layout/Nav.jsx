@@ -2,7 +2,9 @@
 
 const DC_DATA = window.OASIS_DATA;
 
-function Nav({ onHome, onNavigate, cartCount = 0, onCart }) {
+function Nav({ onHome, onNavigate, cartCount = 0, onCart, activePage = 'home' }) {
+  const navPageMap = { '首頁': 'home', '門市': 'stores', '關於我們': 'about' };
+  const isActive = (label) => navPageMap[label] === activePage;
   const { bp } = useViewport();
   const [open, setOpen] = React.useState(false);
   const [visible, setVisible] = React.useState(false);
@@ -95,8 +97,8 @@ function Nav({ onHome, onNavigate, cartCount = 0, onCart }) {
                       else if (n === '關於我們' && onNavigate) { onNavigate('about'); }
                     }} style={{
                       display: 'block', padding: '12px 0', fontSize: 15,
-                      color: i === 0 ? 'var(--forest-900)' : 'var(--ink)',
-                      fontWeight: i === 0 ? 600 : 400,
+                      color: isActive(n) ? 'var(--forest-900)' : 'var(--ink)',
+                      fontWeight: isActive(n) ? 600 : 400,
                       borderBottom: '1px solid var(--ink-08)'
                     }}>{n}</a>
                   </li>
@@ -140,15 +142,15 @@ function Nav({ onHome, onNavigate, cartCount = 0, onCart }) {
             if (i === 0) { onHome(); }
             else if (n === '門市' && onNavigate) { onNavigate('stores'); }
             else if (n === '關於我們' && onNavigate) { onNavigate('about'); }
-          }} className={`nav-link${i === 0 ? ' active' : ''}${scrolled ? ' nav-scrolled' : ''}`} style={{
+          }} className={`nav-link${isActive(n) ? ' active' : ''}${scrolled ? ' nav-scrolled' : ''}`} style={{
             paddingBottom: 4,
-            fontWeight: i === 0 ? 600 : 400,
+            fontWeight: isActive(n) ? 600 : 400,
             color: navText,
-            opacity: i === 0 ? 1 : 0.55,
+            opacity: isActive(n) ? 1 : 0.55,
             transition: 'color .3s, opacity .2s'
           }}
-          onMouseEnter={(e) => { if (i !== 0) e.currentTarget.style.opacity = '1'; }}
-          onMouseLeave={(e) => { if (i !== 0) e.currentTarget.style.opacity = '0.55'; }}>
+          onMouseEnter={(e) => { if (!isActive(n)) e.currentTarget.style.opacity = '1'; }}
+          onMouseLeave={(e) => { if (!isActive(n)) e.currentTarget.style.opacity = '0.55'; }}>
             {n}</a>
         )}
       </div>

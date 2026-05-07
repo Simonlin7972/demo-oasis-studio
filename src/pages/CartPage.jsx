@@ -14,7 +14,7 @@ function CartPage({ cart, onHome, onNavigate, showToast, cartCount, onCart }) {
   if (items.length === 0) {
     return (
       <>
-        <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
+        <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} activePage="cart" />
         <section style={{
           padding: `${isM(bp) ? 48 : 80}px ${pad(bp)}`,
           textAlign: 'center', minHeight: '50vh',
@@ -155,7 +155,7 @@ function CartPage({ cart, onHome, onNavigate, showToast, cartCount, onCart }) {
 
   return (
     <>
-      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
+      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} activePage="cart" />
       <div style={{
         padding: `${isM(bp) ? 24 : 48}px ${pad(bp)} ${isM(bp) ? 32 : 80}px`,
         display: isD(bp) ? 'flex' : 'block',

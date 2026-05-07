@@ -3,7 +3,7 @@
 function HomePage({ onOpen, wishlist, onWish, onAdd, onHome, onNavigate, cartCount, onCart }) {
   return (
     <>
-      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
+      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} activePage="home" />
       <Hero />
       <div style={{ marginTop: -10 }} />
       <Promo />

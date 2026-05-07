@@ -11,7 +11,7 @@ function StoresPage({ onHome, onNavigate, cartCount, onCart }) {
 
   return (
     <>
-      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} />
+      <Nav onHome={onHome} onNavigate={onNavigate} cartCount={cartCount} onCart={onCart} activePage="stores" />
 
       {/* Page Header */}
       <section style={{
