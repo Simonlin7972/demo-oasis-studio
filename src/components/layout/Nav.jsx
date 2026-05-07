@@ -91,6 +91,7 @@ function Nav({ onHome, onNavigate, cartCount = 0, onCart }) {
                       e.preventDefault();
                       closeMenu();
                       if (i === 0) { onHome(); }
+                      else if (n === '門市' && onNavigate) { onNavigate('stores'); }
                       else if (n === '關於我們' && onNavigate) { onNavigate('about'); }
                     }} style={{
                       display: 'block', padding: '12px 0', fontSize: 15,
@@ -137,6 +138,7 @@ function Nav({ onHome, onNavigate, cartCount = 0, onCart }) {
           <a key={i} href="#" onClick={(e) => {
             e.preventDefault();
             if (i === 0) { onHome(); }
+            else if (n === '門市' && onNavigate) { onNavigate('stores'); }
             else if (n === '關於我們' && onNavigate) { onNavigate('about'); }
           }} className={`nav-link${i === 0 ? ' active' : ''}${scrolled ? ' nav-scrolled' : ''}`} style={{
             paddingBottom: 4,

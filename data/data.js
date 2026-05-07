@@ -191,4 +191,46 @@ window.OASIS_DATA = {
     { id: 'g2', cat: '養護技巧', title: '澆水其實是一門哲學', sub: '為什麼「定期澆水」反而是壞習慣？', read: '7 分鐘', img: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=600&q=80' },
     { id: 'g3', cat: '空間靈感', title: '十坪小套房植物配置法', sub: '三盆植物，三種高度，撐起整個客廳', read: '6 分鐘', img: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=600&q=80' },
   ],
+
+  // Store locations
+  stores: [
+    {
+      id: 'st1',
+      name: '台北大安店',
+      tag: '旗艦店',
+      addr: '台北市大安區復興南路一段 126 號 1F',
+      hours: '週一至週日 11:00 – 21:00',
+      phone: '02-2700-1234',
+      desc: '位於捷運大安站旁，三層樓旗艦空間。一樓為選品區，二樓養護教室，三樓植物咖啡廳。',
+      img: 'https://images.unsplash.com/photo-1604762524889-3e2fcc145683?w=800&q=80',
+    },
+    {
+      id: 'st2',
+      name: '台北信義店',
+      tag: '新開幕',
+      addr: '台北市信義區松壽路 12 號 2F',
+      hours: '週一至週日 11:00 – 22:00',
+      phone: '02-8780-5678',
+      desc: '隱身於信義商圈的都市綠洲，專為小空間設計的迷你植栽與桌上盆景。',
+      img: 'https://images.unsplash.com/photo-1545241047-6083a3684587?w=800&q=80',
+    },
+    {
+      id: 'st3',
+      name: '台中草悟店',
+      addr: '台中市西區英才路 530 號 1F',
+      hours: '週二至週日 10:30 – 20:00（週一公休）',
+      phone: '04-2305-9876',
+      desc: '鄰近草悟道的老宅改建空間，主打中大型觀葉植物與手作陶盆。',
+      img: 'https://images.unsplash.com/photo-1463936575829-25148e1db1b8?w=800&q=80',
+    },
+    {
+      id: 'st4',
+      name: '高雄駁二店',
+      addr: '高雄市鹽埕區大勇路 1 號 C7 倉庫',
+      hours: '週二至週日 10:00 – 19:00（週一公休）',
+      phone: '07-521-3456',
+      desc: '駁二藝術特區倉庫改造空間，結合在地藝術家的植物裝置藝術。',
+      img: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=800&q=80',
+    },
+  ],
 };
